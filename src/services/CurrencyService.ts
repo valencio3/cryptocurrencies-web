@@ -13,10 +13,10 @@ export default class CurrencyService {
         })
     }
 
-    async getPrices(): Promise<Price[]> {
+    async getPrices(currency: string = 'usd'): Promise<Price[]> {
         const response = await this._http.get('/coins/markets', {
             params: {
-                vs_currency: 'usd',
+                vs_currency: currency,
                 per_page: PER_PAGE,
                 price_change_percentage: '1h'
             }
@@ -37,6 +37,7 @@ export default class CurrencyService {
                     id,
                     name,
                     image,
+                    currency,
                     currentPrice: current_price,
                     priceChange: price_change_percentage_1h_in_currency
                 }
@@ -47,11 +48,11 @@ export default class CurrencyService {
         return pricesList
     }
 
-    async getCoin(id: string, name: string): Promise<CryptoCoin> {
+    async getCoin(id: string, name: string, currency: string = 'usd'): Promise<CryptoCoin> {
         const response = await this._http.get('/simple/price', {
             params: {
                 ids: id,
-                vs_currencies: 'usd',
+                vs_currencies: currency,
                 include_market_cap: true,
                 include_24hr_vol: true,
                 include_24hr_change: true
@@ -65,7 +66,8 @@ export default class CurrencyService {
             usd24hChange: 0,
             usd24hVolume: 0,
             usdMarketCap: 0,
-            usdPrice: 0
+            usdPrice: 0,
+            currencyType: currency
         }
         if (response.status === 200) {
             const data = response.data[id]
@@ -81,7 +83,8 @@ export default class CurrencyService {
                 usd24hChange: usd_24h_change,
                 usd24hVolume: usd_24h_vol,
                 usdMarketCap: usd_market_cap,
-                usdPrice: usd
+                usdPrice: usd,
+                currencyType: currency
             }
         }
 

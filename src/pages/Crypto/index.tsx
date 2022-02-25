@@ -6,21 +6,23 @@ import { BackButton, BackLink, BackLinkPanel, Container, CryptoPanel, PanelRow, 
 type Params = {
     id: string
     name: string
+    currency: string 
 }
 export const Crypto = () => {
-    const { id, name } = useParams<Params>()
+    const { id, name, currency } = useParams<Params>()
     const [cryptoCoin, setCryptoCoin] = useState<CryptoCoin>({
         id: '',
         name: '',
         usd24hChange: 0,
         usd24hVolume: 0,
         usdMarketCap: 0,
-        usdPrice: 0
+        usdPrice: 0,
+        currencyType: ''
     })
     const currencyService = new CurrencyService()
     const loadCryptoCoin = async () => {
         if (id && name) {
-            const crypto = await currencyService.getCoin(id, name)
+            const crypto = await currencyService.getCoin(id, name, currency)
             setCryptoCoin(crypto)
         }
     }
@@ -28,7 +30,6 @@ export const Crypto = () => {
     useEffect(() => {
         loadCryptoCoin()
     }, [])
-    const navigate = useNavigate()
     return (
         <Container>
             <CryptoPanel>
@@ -58,7 +59,6 @@ export const Crypto = () => {
                  <BackButton>Back to currencies</BackButton>
                 </BackLink>
             </BackLinkPanel>
-            {/* <h1 onClick={() => navigate('/')}>{JSON.stringify(cryptoCoin)}</h1> */}
         </Container>
     )
 }

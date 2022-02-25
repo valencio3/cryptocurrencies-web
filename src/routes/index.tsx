@@ -8,7 +8,7 @@ export const routes: RouteObject[] = [
     element: <Home />
   },
   {
-    path: '/crypto/:id/:name',
+    path: '/crypto/:id/:name/:currency',
     element: <Crypto />
   }
 ]

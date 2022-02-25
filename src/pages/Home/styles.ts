@@ -23,6 +23,18 @@ export const Filter = styled.input.attrs({type: 'text'})`
         width: 90%;
     }
 `
+
+export const ContainerCurrencyType = styled.div`
+padding: 10px 10px;
+display: flex;
+justify-content: center;
+align-content: space-between;
+`
+export const CurrencyType = styled.input.attrs({type: 'radio'})`
+ 
+ font-family: 'regular';
+ 
+`
 export const LoadingArea = styled.div`
 margin: auto;
 width: 50px;

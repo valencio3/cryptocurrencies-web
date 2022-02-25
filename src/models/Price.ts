@@ -4,6 +4,7 @@ type Price = {
     image: string
     currentPrice: number
     priceChange: number
+    currency: string
 }
 
 export default Price
