@@ -1,10 +1,10 @@
 type CryptoCoin = {
     id: string
     name: string
-    usdPrice: number
-    usdMarketCap: number
-    usd24hVolume: number
-    usd24hChange: number
+    price: number
+    marketCap: number
+    volume24h: number
+    change24h: number
     currencyType: string
 }
 
